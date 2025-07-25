@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  n8n:
+    image: n8nio/n8n:1.104.0
+    platform: linux/amd64
+    container_name: trusty-n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - n8n_data:/home/node/.n8n
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin123
+
+  coqui-tts:
+    image: ghcr.io/idiap/coqui-tts-cpu:latest
+    platform: linux/amd64
+    container_name: trusty-coqui
+    ports:
+      - "5002:5002"
+    entrypoint: /bin/bash
+    command: -c "tts-server --model_name tts_models/multilingual/multi-dataset/xtts_v2"
+    volumes:
+      - ./voices:/root/.local/share/tts
+
+volumes:
+  n8n_data:
+

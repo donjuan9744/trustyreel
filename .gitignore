@@ -1,0 +1,17 @@
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Env files
+.env
+
+# Build artifacts
+dist/
+build/
